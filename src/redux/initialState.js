@@ -1,6 +1,8 @@
 export const initialState = {
     events: [],
-    view: "month"
+    settings: {
+        view: "month"
+    }
 };
 
 export const getCurrentState = (state = initialState) => {
