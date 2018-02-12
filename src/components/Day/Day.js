@@ -33,3 +33,5 @@ class Day extends Component {
     }
 
 }
+
+export default Day;

@@ -1,7 +1,14 @@
 export const initialState = {
     events: [],
     settings: {
-        view: "month"
+        view: {
+            current: "Month",
+            choices: [
+                "Month",
+                "Day"
+            ]
+        }
+
     }
 };
 
