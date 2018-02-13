@@ -3,13 +3,15 @@ import {
     initialState
 } from "../initialState";
 
-const viewFilter = (state = 'MONTH', action) => {
+const viewReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'SET_MONTH_VIEW':
         case 'SET_DAY_VIEW':
-            return action.view
-            break;
+
+            let newState = getCurrentState(state);
+            newState.settings.view.current = action.view;
+            return newState;
 
         default:
             return state;
@@ -17,4 +19,4 @@ const viewFilter = (state = 'MONTH', action) => {
 
 }
 
-export default viewFilter;
+export default viewReducer;
