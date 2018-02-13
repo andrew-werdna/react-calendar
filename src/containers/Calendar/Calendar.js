@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Calendar.css';
 import moment from "moment";
+import {
+    Button,
+    FormControl,
+    Glyphicon
+} from 'react-bootstrap';
 
 class Calendar extends Component {
 
@@ -35,18 +39,29 @@ class Calendar extends Component {
     render() {
         return (
 
-            <div className="calendar">
-                <div className="header">
-                    <div className="title">{this.state.now.format('MMMM YYYY')}</div>
-                    <div className="navigation">
-                        <div className="navigation--left">
-                            <span className="glyphicon glyphicon-chevron-left"></span>
-                        </div>
-                        <div className="navigation--right">
-                            <span className="glyphicon glyphicon-chevron-right"></span>
+            <div className="calendar container">
+                <div className="header row">
+                    <div className="title col-md-2 col-md-offset-1">{this.state.now.format('MMMM YYYY')}</div>
+                    <div className="navigation-container col-md-2 col-md-offset-1">
+                        <div className="navigation row">
+                            <div className="navigation--left col-md-3 col-md-offset-1">
+                                <Button bsSize="small">
+                                    <Glyphicon glyph="menu-left" />
+                                </Button>
+                            </div>
+                            <div className="navigation--right col-md-3">
+                                <Button bsSize="small">
+                                    <Glyphicon glyph="menu-right" />
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                    <div className="view"></div>
+                    <div className="view col-md-2 col-md-offset-1">
+                        <FormControl componentClass="select" placeholder="view">
+                            <option value="Month">Month</option>
+                            <option value="Day">Day</option>
+                        </FormControl>
+                    </div>
                 </div>
             </div>
 
