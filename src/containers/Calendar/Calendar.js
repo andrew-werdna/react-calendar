@@ -6,6 +6,7 @@ import {
     FormControl,
     Glyphicon
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 class Calendar extends Component {
 
@@ -37,6 +38,7 @@ class Calendar extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
 
             <div className="calendar container">
