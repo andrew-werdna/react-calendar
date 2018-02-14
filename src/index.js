@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import calendarReducer from './redux/reducers';
-import initialState from './redux/initialState';
+import { initialState } from './redux/initialState';
 
 const store = createStore(calendarReducer, initialState);
 
