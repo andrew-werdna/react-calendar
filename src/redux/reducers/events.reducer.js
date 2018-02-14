@@ -9,7 +9,7 @@ const eventReducer = (state = initialState, action) => {
         case 'EVENT_CREATE':
 
             let newState = getCurrentState(state);
-            newState.events.push(action.event);
+            newState.events.push(action.payload);
             return newState;
 
         /**

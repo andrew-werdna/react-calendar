@@ -1,15 +1,15 @@
 
 export const createEvent = (event) => ({
     type: 'EVENT_CREATE',
-    event
+    payload: event
 });
 
 export const editEvent = (id) => ({
     type: 'EVENT_EDIT',
-    id
+    payload: id
 });
 
 export const deleteEvent = (id) => ({
     type: 'EVENT_DELETE',
-    id
+    payload: id
 });

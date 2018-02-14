@@ -5,6 +5,7 @@ export const initialState = {
             current: "Month",
             choices: [
                 "Month",
+                "Week",
                 "Day"
             ]
         }
