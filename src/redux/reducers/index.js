@@ -3,7 +3,7 @@ import viewReducer from './settings.reducer';
 import eventReducer from './events.reducer';
 
 const calendarReducer = combineReducers({
-    view: viewReducer,
+    settings: viewReducer,
     events: eventReducer
 });
 

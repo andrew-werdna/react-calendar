@@ -3,13 +3,13 @@ import {
     initialState
 } from "../initialState";
 
-const eventReducer = (state = initialState, action) => {
+const eventReducer = (state = initialState.events, action) => {
 
     switch (action.type) {
         case 'EVENT_CREATE':
 
             let newState = getCurrentState(state);
-            newState.events.push(action.payload);
+            newState.push(action.payload);
             return newState;
 
         /**

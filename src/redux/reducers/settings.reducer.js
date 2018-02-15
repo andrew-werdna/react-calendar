@@ -3,7 +3,7 @@ import {
     initialState
 } from "../initialState";
 
-const viewReducer = (state = initialState, action) => {
+const viewReducer = (state = initialState.settings, action) => {
 
     switch (action.type) {
         case 'SET_MONTH_VIEW':
@@ -11,7 +11,7 @@ const viewReducer = (state = initialState, action) => {
         case 'SET_DAY_VIEW':
 
             let newState = getCurrentState(state);
-            newState.settings.view.current = action.payload;
+            newState.view.current = action.payload;
             return newState;
 
         default:

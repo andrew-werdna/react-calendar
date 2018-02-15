@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import './Calendar.css';
 import moment from "moment";
-import {
-    Button,
-    FormControl,
-    Glyphicon
-} from 'react-bootstrap';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import * as actionCreators from "../../redux/actions/index";
+import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 
 class Calendar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             now: moment(),
             days: {
@@ -35,36 +33,19 @@ class Calendar extends Component {
                 ]
             }
         }
+        console.log(`constructor()`);
+        console.log(`props = ${JSON.stringify(props)}`);
+        // console.log(`state = ${JSON.stringify(this.state)}`);
     }
 
     render() {
-        console.log(this.props);
         return (
 
-            <div className="calendar container">
-                <div className="header row">
-                    <div className="title col-md-2 col-md-offset-1">{this.state.now.format('MMMM YYYY')}</div>
-                    <div className="navigation-container col-md-2 col-md-offset-1">
-                        <div className="navigation row">
-                            <div className="navigation--left col-md-3 col-md-offset-1">
-                                <Button bsSize="small">
-                                    <Glyphicon glyph="menu-left" />
-                                </Button>
-                            </div>
-                            <div className="navigation--right col-md-3">
-                                <Button bsSize="small">
-                                    <Glyphicon glyph="menu-right" />
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="view col-md-2 col-md-offset-1">
-                        <FormControl componentClass="select" placeholder="view">
-                            <option value="Month">Month</option>
-                            <option value="Day">Day</option>
-                        </FormControl>
-                    </div>
-                </div>
+            <div className="calendar">
+                <CalendarHeader
+                    now={this.state.now.format('MMMM YYYY')}
+                    viewChoices={this.props.viewChoices}>
+                </CalendarHeader>
             </div>
 
         );
@@ -72,4 +53,18 @@ class Calendar extends Component {
 
 }
 
-export default Calendar;
+const mapStateToProps = (state) => {
+    return {
+        viewChoices: state.settings.view.choices,
+        viewCurrent: state.settings.view.current,
+        events: state.events
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(actionCreators, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
