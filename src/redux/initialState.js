@@ -8,8 +8,10 @@ export const initialState = {
                 "Week",
                 "Day"
             ]
+        },
+        api: {
+            events: "http://localhost:4000/events"
         }
-
     }
 };
 
