@@ -1,7 +1,4 @@
-import {
-    getCurrentState,
-    initialState
-} from "../initialState";
+import { initialState } from "../initialState";
 
 const eventReducer = (state = initialState.events, action) => {
 

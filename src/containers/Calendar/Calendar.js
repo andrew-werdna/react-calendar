@@ -51,6 +51,7 @@ class Calendar extends Component {
                 .then((response) => {
                     response.data.map((event) => {
                         this.props.actions.createEvent(event);
+                        return event;
                     });
             })
             .catch((error) => {
