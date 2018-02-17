@@ -91,3 +91,11 @@ export function getCalendarDays(momentObj) {
 export function getCalendarWeeks(daysArry) {
     return calendarMonthToWeeks(daysArry);
 }
+
+export function nextMonth(now) {
+    return moment(now.add(1, 'month'));
+}
+
+export function previousMonth(now) {
+    return moment(now.subtract(1, 'month'));
+}
