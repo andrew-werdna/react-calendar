@@ -8,6 +8,8 @@ import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 import axios from 'axios';
 import { weekdays } from '../../redux/initialState';
 import Weekdays from '../../components/Weekdays/Weekdays';
+import * as TimeUtils from '../../utils/index';
+import { getCurrentState } from '../../redux/initialState';
 
 class Calendar extends Component {
 
@@ -16,7 +18,10 @@ class Calendar extends Component {
 
         this.state = {
             now: moment(),
-            days: weekdays
+            active: moment(),
+            weekDays: weekdays,
+            calendarDays: [],
+            calendarWeeks: []
         }
         console.log(`constructor()`);
         console.log(this.props);
@@ -24,6 +29,29 @@ class Calendar extends Component {
 
     componentDidMount() {
         this.loadEvents();
+        this.getCalendarSetup();
+    }
+
+    getCalendarSetup() {
+
+        let currentMonthInDays,
+            calendarMonthInDays,
+            calendarMonthInWeeks,
+            newState;
+
+        currentMonthInDays = TimeUtils.getDaysArrayByMonth(
+            this.state.now.month(),
+            this.state.now.year()
+        );
+
+        calendarMonthInDays = TimeUtils.addSurroundingDays(currentMonthInDays);
+        calendarMonthInWeeks = TimeUtils.calendarMonthToWeeks(calendarMonthInDays);
+
+        newState = getCurrentState(this.state);
+        newState.calendarDays = calendarMonthInDays;
+        newState.calendarWeeks = calendarMonthInWeeks;
+        this.setState(newState);
+
     }
 
     loadEvents() {
@@ -54,9 +82,11 @@ class Calendar extends Component {
                     now={this.state.now.format('MMMM YYYY')}
                     viewChoices={this.props.viewChoices}>
                 </CalendarHeader>
-                events length {this.props.events.length}
+                events length {this.props.events.length} <br />
+                daysArray length {this.state.calendarDays.length} <br />
+                calendarWeeks length {this.state.calendarWeeks.length}
 
-                <Weekdays days={this.state.days}></Weekdays>
+                <Weekdays days={this.state.weekDays}></Weekdays>
 
             </div>
 

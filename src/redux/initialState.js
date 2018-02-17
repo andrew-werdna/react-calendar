@@ -20,11 +20,11 @@ export const getCurrentState = (state = initialState) => {
 };
 
 export const weekdays = [
-    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
+    "Sunday"
 ];

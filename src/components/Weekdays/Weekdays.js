@@ -4,10 +4,6 @@ import './Weekdays.css'
 
 class Weekdays extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
 
         return (
