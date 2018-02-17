@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as actionCreators from "../../redux/actions/index";
 import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 import axios from 'axios';
+import { weekdays } from '../../redux/initialState';
+import Weekdays from '../../components/Weekdays/Weekdays';
 
 class Calendar extends Component {
 
@@ -14,26 +16,7 @@ class Calendar extends Component {
 
         this.state = {
             now: moment(),
-            days: {
-                full: [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ],
-                short: [
-                    "Sun",
-                    "Mon",
-                    "Tue",
-                    "Wed",
-                    "Thu",
-                    "Fri",
-                    "Sat"
-                ]
-            }
+            days: weekdays
         }
         console.log(`constructor()`);
         console.log(this.props);
@@ -72,6 +55,9 @@ class Calendar extends Component {
                     viewChoices={this.props.viewChoices}>
                 </CalendarHeader>
                 events length {this.props.events.length}
+
+                <Weekdays days={this.state.days}></Weekdays>
+
             </div>
 
         );

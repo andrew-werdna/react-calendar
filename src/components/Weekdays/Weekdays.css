@@ -1,0 +1,13 @@
+.weekdays {
+    margin-top: 1.5em;
+}
+
+.weekday {
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+.columns-7 {
+    width: calc(100% / 7);
+    padding: 5px;
+}
