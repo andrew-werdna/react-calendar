@@ -40,10 +40,10 @@ class Calendar extends Component {
     }
 
     componentDidMount() {
-        this.getEvents();
+        this.loadEvents();
     }
 
-    getEvents() {
+    loadEvents() {
 
         if (this.props.apiEndpoint) {
 
