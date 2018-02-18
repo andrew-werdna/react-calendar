@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import './Calendar.css';
 import moment from "moment";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import * as actionCreators from "../../redux/actions/index";
-import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 import axios from 'axios';
-import { weekdays } from '../../redux/initialState';
+
+import './Calendar.css';
+
+import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 import Weekdays from '../../components/Weekdays/Weekdays';
+import CalendarRow from '../../components/CalendarRow/CalendarRow';
+
+import * as actionCreators from "../../redux/actions/index";
+import { weekdays } from '../../redux/initialState';
 import * as TimeUtils from '../../utils/index';
 import { getCurrentState } from '../../redux/initialState';
 
@@ -82,11 +86,33 @@ class Calendar extends Component {
                     now={this.state.now.format('MMMM YYYY')}
                     viewChoices={this.props.viewChoices}>
                 </CalendarHeader>
+
+                <br />
                 events length {this.props.events.length} <br />
                 daysArray length {this.state.calendarDays.length} <br />
                 calendarWeeks length {this.state.calendarWeeks.length}
 
                 <Weekdays days={this.state.weekDays}></Weekdays>
+
+                <div className="calendar-body container">
+                    {
+                        this.state.calendarWeeks.map((calendarWeek, index) => {
+
+                            let _events = this.props.events.filter((event) => {
+                                return TimeUtils.isEventInWeek(event, calendarWeek);
+                            });
+
+                            return (
+                                <CalendarRow
+                                    key={"week" + index}
+                                    weekData={calendarWeek}
+                                    weekEvents={_events}>
+                                </CalendarRow>
+                            );
+
+                        })
+                    }
+                </div>
 
             </div>
 

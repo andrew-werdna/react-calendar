@@ -99,3 +99,25 @@ export function nextMonth(now) {
 export function previousMonth(now) {
     return moment(now.subtract(1, 'month'));
 }
+
+export function isSameDate(momentObj1, momentObj2) {
+    let date1 = momentObj1.format("YYYY-MM-DD");
+    let date2 = momentObj2.format("YYYY-MM-DD");
+    return (date1 === date2);
+}
+
+export function isEventInWeek(event, calendarWeek) {
+
+    let eventMoment = moment(event.date);
+    let weekStart = calendarWeek[0].date;
+    let weekEnd = calendarWeek[calendarWeek.length - 1].date;
+
+    weekStart.hours(0).minutes(0).seconds(1);
+    weekEnd.hours(23).minutes(59).seconds(59);
+
+    return (
+        (weekStart < eventMoment) &&
+        (weekEnd > eventMoment)
+    );
+
+}

@@ -4,8 +4,8 @@ import {
     FormControl,
     Glyphicon
 } from 'react-bootstrap';
-import './CalendarHeader.css';
 import PropTypes from 'prop-types';
+import './CalendarHeader.css';
 
 class CalendarHeader extends Component {
 
