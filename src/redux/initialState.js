@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const initialState = {
     events: [],
     settings: {
@@ -12,6 +14,9 @@ export const initialState = {
         api: {
             events: "http://localhost:4000/events"
         }
+    },
+    calendar: {
+        now: moment()
     }
 };
 

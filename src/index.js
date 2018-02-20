@@ -8,7 +8,11 @@ import { Provider } from 'react-redux';
 import calendarReducer from './redux/reducers';
 import { initialState } from './redux/initialState';
 
-const store = createStore(calendarReducer, initialState);
+const store = createStore(
+    calendarReducer,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
     <Provider store={store}>

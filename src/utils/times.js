@@ -101,8 +101,9 @@ export function previousMonth(now) {
 }
 
 export function isSameDate(momentObj1, momentObj2) {
-    let date1 = momentObj1.format("YYYY-MM-DD");
-    let date2 = momentObj2.format("YYYY-MM-DD");
+    const format = "YYYY-MM-DD";
+    let date1 = momentObj1.format(format);
+    let date2 = momentObj2.format(format);
     return (date1 === date2);
 }
 

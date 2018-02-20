@@ -7,7 +7,7 @@ class CalendarRow extends Component {
     render() {
         return (
             <div  className="week row">
-                {JSON.stringify(this.props.weekData)}
+                {JSON.stringify(this.props)}
             </div>
         );
 

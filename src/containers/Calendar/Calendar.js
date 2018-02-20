@@ -21,11 +21,9 @@ class Calendar extends Component {
         super(props);
 
         this.state = {
-            now: moment(),
-            active: moment(),
-            weekDays: weekdays,
             calendarDays: [],
-            calendarWeeks: []
+            calendarWeeks: [],
+            weekDays: weekdays
         }
         console.log(`constructor()`);
         console.log(this.props);
@@ -44,8 +42,8 @@ class Calendar extends Component {
             newState;
 
         currentMonthInDays = TimeUtils.getDaysArrayByMonth(
-            this.state.now.month(),
-            this.state.now.year()
+            this.props.calendar.now.month(),
+            this.props.calendar.now.year()
         );
 
         calendarMonthInDays = TimeUtils.addSurroundingDays(currentMonthInDays);
@@ -83,14 +81,14 @@ class Calendar extends Component {
 
             <div className="calendar">
                 <CalendarHeader
-                    now={this.state.now.format('MMMM YYYY')}
+                    now={this.props.calendar.now.format('MMMM YYYY')}
                     viewChoices={this.props.viewChoices}>
                 </CalendarHeader>
 
                 <br />
-                events length {this.props.events.length} <br />
-                daysArray length {this.state.calendarDays.length} <br />
-                calendarWeeks length {this.state.calendarWeeks.length}
+                props.events length {this.props.events.length} <br />
+                state.calendarDays length {this.state.calendarDays.length} <br />
+                state.calendarWeeks length {this.state.calendarWeeks.length}
 
                 <Weekdays days={this.state.weekDays}></Weekdays>
 
@@ -126,7 +124,8 @@ const mapStateToProps = (state) => {
         viewChoices: state.settings.view.choices,
         viewCurrent: state.settings.view.current,
         events: state.events,
-        apiEndpoint: state.settings.api.events
+        apiEndpoint: state.settings.api.events,
+        calendar: state.calendar
     };
 };
 
