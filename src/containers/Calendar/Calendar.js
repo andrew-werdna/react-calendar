@@ -85,11 +85,6 @@ class Calendar extends Component {
                     viewChoices={this.props.viewChoices}>
                 </CalendarHeader>
 
-                <br />
-                {/* props.events length {this.props.events.length} <br />
-                state.calendarDays length {this.state.calendarDays.length} <br />
-                state.calendarWeeks length {this.state.calendarWeeks.length} */}
-
                 <Weekdays days={this.state.weekDays}></Weekdays>
 
                 <div className="calendar-body container">
