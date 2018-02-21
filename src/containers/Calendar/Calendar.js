@@ -86,9 +86,9 @@ class Calendar extends Component {
                 </CalendarHeader>
 
                 <br />
-                props.events length {this.props.events.length} <br />
+                {/* props.events length {this.props.events.length} <br />
                 state.calendarDays length {this.state.calendarDays.length} <br />
-                state.calendarWeeks length {this.state.calendarWeeks.length}
+                state.calendarWeeks length {this.state.calendarWeeks.length} */}
 
                 <Weekdays days={this.state.weekDays}></Weekdays>
 
@@ -104,6 +104,7 @@ class Calendar extends Component {
                                 <CalendarRow
                                     key={"week" + index}
                                     weekData={calendarWeek}
+                                    present={this.props.calendar.now}
                                     weekEvents={_events}>
                                 </CalendarRow>
                             );
