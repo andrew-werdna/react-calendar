@@ -75,14 +75,32 @@ class Calendar extends Component {
 
     }
 
+    selectNextMonth() {
+        let nextMonth = TimeUtils.nextMonth(this.props.calendar.now)
+        this.props.actions.setPresentMoment(nextMonth);
+        this.getCalendarSetup();
+    }
+
+    selectPreviousMonth() {
+        let previousMonth = TimeUtils.previousMonth(this.props.calendar.now)
+        this.props.actions.setPresentMoment(previousMonth);
+        this.getCalendarSetup();
+    }
+
     render() {
         return (
 
             <div className="calendar">
                 <CalendarHeader
                     now={this.props.calendar.now.format('MMMM YYYY')}
-                    viewChoices={this.props.viewChoices}>
+                    viewChoices={this.props.viewChoices}
+                    onNextMonth={this.selectNextMonth.bind(this)}
+                    onPreviousMonth={this.selectPreviousMonth.bind(this)}>
                 </CalendarHeader>
+
+                <b>this.props.viewCurrent</b> {JSON.stringify(this.props.viewCurrent)} <br />
+                <b>this.props.events</b> {JSON.stringify(this.props.events)} <br />
+                <b>this.props.calendar</b> {JSON.stringify(this.props.calendar)} <br />
 
                 <Weekdays days={this.state.weekDays}></Weekdays>
 

@@ -17,12 +17,16 @@ class CalendarHeader extends Component {
                     <div className="navigation-container col-md-2 col-md-offset-1">
                         <div className="navigation row">
                             <div className="navigation--left col-md-3 col-md-offset-1">
-                                <Button bsSize="small">
+                                <Button
+                                    onClick={this.props.onPreviousMonth}
+                                    bsSize="small">
                                     <Glyphicon glyph="menu-left" />
                                 </Button>
                             </div>
                             <div className="navigation--right col-md-3">
-                                <Button bsSize="small">
+                                <Button
+                                    onClick={this.props.onNextMonth}
+                                    bsSize="small">
                                     <Glyphicon glyph="menu-right" />
                                 </Button>
                             </div>
@@ -48,7 +52,9 @@ class CalendarHeader extends Component {
 
 CalendarHeader.propTypes = {
     now: PropTypes.string.isRequired,
-    viewChoices: PropTypes.array.isRequired
+    viewChoices: PropTypes.array.isRequired,
+    onNextMonth: PropTypes.func.isRequired,
+    onPreviousMonth: PropTypes.func.isRequired
 };
 
 export default CalendarHeader;
