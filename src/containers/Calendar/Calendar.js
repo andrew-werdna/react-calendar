@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment';
 
 import './Calendar.css';
 
@@ -20,20 +21,22 @@ class Calendar extends Component {
         super(props);
 
         this.state = {
-            calendarDays: [],
             calendarWeeks: [],
+            today: moment(),
             weekDays: weekdays
         }
+
         console.log(`constructor()`);
         console.log(this.props);
+
     }
 
     componentDidMount() {
         this.loadEvents();
-        this.getCalendarSetup();
+        this.getCalendarInMonth();
     }
 
-    getCalendarSetup() {
+    getCalendarInMonth() {
 
         let currentMonthInDays,
             calendarMonthInDays,
@@ -46,11 +49,36 @@ class Calendar extends Component {
         );
 
         calendarMonthInDays = TimeUtils.addSurroundingDays(currentMonthInDays);
-        calendarMonthInWeeks = TimeUtils.calendarMonthToWeeks(calendarMonthInDays);
+        calendarMonthInWeeks = TimeUtils.daysArrayToCalendarWeek(calendarMonthInDays);
 
         newState = getCurrentState(this.state);
-        newState.calendarDays = calendarMonthInDays;
         newState.calendarWeeks = calendarMonthInWeeks;
+        this.setState(newState);
+
+    }
+
+    getCalendarInWeek() {
+
+        let currentWeekInDays,
+            calendarWeek,
+            newState;
+
+        currentWeekInDays = TimeUtils.getSingleCalendarWeekInDays(this.props.calendar.now);
+        calendarWeek = TimeUtils.daysArrayToCalendarWeek(currentWeekInDays);
+        newState = getCurrentState(this.state);
+        newState.calendarWeeks = calendarWeek;
+        this.setState(newState);
+
+    }
+
+    getCalendarInDay() {
+
+        let currentDayAsWeek,
+            newState;
+
+        currentDayAsWeek = TimeUtils.getSingleCalendarDayAsWeek(this.props.calendar.now);
+        newState = getCurrentState(this.state);
+        newState.calendarWeeks = currentDayAsWeek;
         this.setState(newState);
 
     }
@@ -78,13 +106,103 @@ class Calendar extends Component {
     selectNextMonth() {
         let nextMonth = TimeUtils.nextMonth(this.props.calendar.now)
         this.props.actions.setPresentMoment(nextMonth);
-        this.getCalendarSetup();
+        this.getCalendarInMonth();
     }
 
     selectPreviousMonth() {
         let previousMonth = TimeUtils.previousMonth(this.props.calendar.now)
         this.props.actions.setPresentMoment(previousMonth);
-        this.getCalendarSetup();
+        this.getCalendarInMonth();
+    }
+
+    selectNextWeek() {
+        let nextWeek = TimeUtils.nextWeek(this.props.calendar.now);
+        this.props.actions.setPresentMoment(nextWeek);
+        this.getCalendarInWeek();
+    }
+
+    selectPreviousWeek() {
+        let previousWeek = TimeUtils.previousWeek(this.props.calendar.now);
+        this.props.actions.setPresentMoment(previousWeek);
+        this.getCalendarInWeek();
+    }
+
+    selectNextDay() {
+        let nextDay = TimeUtils.nextDay(this.props.calendar.now);
+        this.props.actions.setPresentMoment(nextDay);
+        this.getCalendarInDay();
+    }
+
+    selectPreviousDay() {
+        let previousDay = TimeUtils.previousDay(this.props.calendar.now);
+        this.props.actions.setPresentMoment(previousDay);
+        this.getCalendarInDay();
+    }
+
+    selectNext() {
+
+        switch (this.props.viewCurrent) {
+            case "Month":
+                this.selectNextMonth();
+                break;
+
+            case "Week":
+                this.selectNextWeek();
+                break;
+
+            case "Day":
+                this.selectNextDay();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    selectPrevious() {
+
+        switch (this.props.viewCurrent) {
+            case "Month":
+                this.selectPreviousMonth();
+                break;
+
+            case "Week":
+                this.selectPreviousWeek();
+                break;
+
+            case "Day":
+                this.selectPreviousDay();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    changeView(event) {
+
+        let viewScope = event.target.value;
+        this.props.actions.setView(viewScope);
+
+        switch (viewScope) {
+            case "Month":
+                this.getCalendarInMonth();
+                break;
+
+            case "Week":
+                this.getCalendarInWeek();
+                break;
+
+            case "Day":
+                this.getCalendarInDay();
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     render() {
@@ -94,15 +212,17 @@ class Calendar extends Component {
                 <CalendarHeader
                     now={this.props.calendar.now.format('MMMM YYYY')}
                     viewChoices={this.props.viewChoices}
-                    onNextMonth={this.selectNextMonth.bind(this)}
-                    onPreviousMonth={this.selectPreviousMonth.bind(this)}>
+                    onNext={this.selectNext.bind(this)}
+                    onPrevious={this.selectPrevious.bind(this)}
+                    onChangeView={this.changeView.bind(this)}>
                 </CalendarHeader>
 
                 <b>this.props.viewCurrent</b> {JSON.stringify(this.props.viewCurrent)} <br />
                 <b>this.props.events</b> {JSON.stringify(this.props.events)} <br />
-                <b>this.props.calendar</b> {JSON.stringify(this.props.calendar)} <br />
+                <b>this.props.calendar.now</b> {JSON.stringify(this.props.calendar.now.format("YYYY-MM-DD"))} <br />
+                <b>this.state.today</b> {JSON.stringify(this.state.today.format("YYYY-MM-DD"))} <br />
 
-                <Weekdays days={this.state.weekDays}></Weekdays>
+                <Weekdays today={this.state.today} currentView={this.props.viewCurrent} days={this.state.weekDays}></Weekdays>
 
                 <div className="calendar-body container">
                     {
@@ -116,7 +236,7 @@ class Calendar extends Component {
                                 <CalendarRow
                                     key={"week" + index}
                                     weekData={calendarWeek}
-                                    present={this.props.calendar.now}
+                                    present={this.state.today}
                                     weekEvents={_events}>
                                 </CalendarRow>
                             );

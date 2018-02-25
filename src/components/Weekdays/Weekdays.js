@@ -8,7 +8,6 @@ class Weekdays extends Component {
 
         return (
 
-
             <div className="weekdays container">
                 <div className="row">
                     {
@@ -29,6 +28,8 @@ class Weekdays extends Component {
 
 Weekdays.propTypes = {
     days: PropTypes.array.isRequired,
+    currentView: PropTypes.string.isRequired,
+    today: PropTypes.object.isRequired
 };
 
 export default Weekdays;

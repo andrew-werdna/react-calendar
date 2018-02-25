@@ -18,14 +18,14 @@ class CalendarHeader extends Component {
                         <div className="navigation row">
                             <div className="navigation--left col-md-3 col-md-offset-1">
                                 <Button
-                                    onClick={this.props.onPreviousMonth}
+                                    onClick={this.props.onPrevious}
                                     bsSize="small">
                                     <Glyphicon glyph="menu-left" />
                                 </Button>
                             </div>
                             <div className="navigation--right col-md-3">
                                 <Button
-                                    onClick={this.props.onNextMonth}
+                                    onClick={this.props.onNext}
                                     bsSize="small">
                                     <Glyphicon glyph="menu-right" />
                                 </Button>
@@ -33,7 +33,11 @@ class CalendarHeader extends Component {
                         </div>
                     </div>
                     <div className="view col-md-2 col-md-offset-1">
-                        <FormControl componentClass="select" placeholder="view">
+                        <FormControl
+                            onChange={this.props.onChangeView}
+                            className="view-settings"
+                            componentClass="select"
+                            placeholder="view">
                             {
                                 this.props.viewChoices.map((choice) => {
                                     return (
@@ -53,8 +57,9 @@ class CalendarHeader extends Component {
 CalendarHeader.propTypes = {
     now: PropTypes.string.isRequired,
     viewChoices: PropTypes.array.isRequired,
-    onNextMonth: PropTypes.func.isRequired,
-    onPreviousMonth: PropTypes.func.isRequired
+    onNext: PropTypes.func.isRequired,
+    onPrevious: PropTypes.func.isRequired,
+    onChangeView: PropTypes.func.isRequired
 };
 
 export default CalendarHeader;

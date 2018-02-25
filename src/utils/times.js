@@ -18,6 +18,36 @@ export function getDaysArrayByMonth(mIndex, yIndex) {
 
 }
 
+export function getSingleCalendarDayAsWeek(momentObj) {
+
+    let days = [];
+
+    days.push([{
+        date: momentObj
+    }]);
+
+    return days;
+}
+
+export function getSingleCalendarWeekInDays(momentObj) {
+
+    let arrDays = [],
+        dupe;
+
+    for (let i = 1; i < 8; i++) {
+
+        dupe = moment(momentObj.format("YYYY-MM-DD"));
+
+        arrDays.push({
+            date: dupe.isoWeekday(i)
+        });
+
+    }
+
+    return arrDays;
+
+}
+
 export function getPrecedingDays(m) {
 
     let firstDay = m.day();
@@ -64,7 +94,7 @@ export function addSurroundingDays(mArray) {
 
 }
 
-export function calendarMonthToWeeks(mArray) {
+export function daysArrayToCalendarWeek(mArray) {
 
     let results = [],
         dupe = [],
@@ -89,7 +119,7 @@ export function getCalendarDays(momentObj) {
 }
 
 export function getCalendarWeeks(daysArry) {
-    return calendarMonthToWeeks(daysArry);
+    return daysArrayToCalendarWeek(daysArry);
 }
 
 export function nextMonth(now) {
@@ -98,6 +128,22 @@ export function nextMonth(now) {
 
 export function previousMonth(now) {
     return moment(now.subtract(1, 'month'));
+}
+
+export function nextDay(now) {
+    return moment(now.add(1, 'day'));
+}
+
+export function previousDay(now) {
+    return moment(now.subtract(1, 'day'));
+}
+
+export function nextWeek(now) {
+    return moment(now.add(1, 'week'));
+}
+
+export function previousWeek(now) {
+    return moment(now.subtract(1, 'week'));
 }
 
 export function isSameDate(momentObj1, momentObj2) {
