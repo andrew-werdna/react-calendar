@@ -6,3 +6,7 @@
 .week {
     min-height: 10em;
 }
+
+.big-day {
+    min-height: 50vh;
+}

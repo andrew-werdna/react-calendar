@@ -5,13 +5,20 @@ import * as TimeUtils from "../../utils";
 
 class CalendarDay extends Component {
 
+    getIsDay() {
+        return this.props.currentView === "Day";
+    }
+
     render() {
         return (
-            <div className="single_day col-md-1 columns-7">
+            <div className={"single_day col-md-1 columns-7 " + (this.getIsDay() ? 'large-day' : 'normal')}>
                 <div className="row">
                     <div className="col-md-4">
                         <div
-                            className={TimeUtils.isSameDate(this.props.date, this.props.present) ? "today" : "not_today"}>
+                            className={
+                                (TimeUtils.isSameDate(this.props.date, this.props.present) ? "today" : "not_today") +
+                                (this.getIsDay() ? ' small-date' : '')
+                            }>
                             {this.props.date.format("DD")}
                         </div>
                     </div>
@@ -38,7 +45,8 @@ class CalendarDay extends Component {
 CalendarDay.propTypes = {
     date: PropTypes.object.isRequired,
     present: PropTypes.object.isRequired,
-    events: PropTypes.array.isRequired
+    events: PropTypes.array.isRequired,
+    currentView: PropTypes.string.isRequired
 }
 
 export default CalendarDay;

@@ -9,6 +9,7 @@ import './Calendar.css';
 import CalendarHeader from "../../components/CalendarHeader/CalendarHeader";
 import Weekdays from '../../components/Weekdays/Weekdays';
 import CalendarRow from '../../components/CalendarRow/CalendarRow';
+import Event from "../../components/Event/Event";
 
 import * as actionCreators from "../../redux/actions/index";
 import { weekdays } from '../../redux/initialState';
@@ -205,6 +206,35 @@ class Calendar extends Component {
 
     }
 
+    onEventShow() {
+        return (
+            <Event></Event>
+        );
+    }
+
+    handleWeekDay() {
+
+        if (this.props.viewCurrent === "Day") {
+            return (
+                <Weekdays
+                    today={this.state.today}
+                    currentView={this.props.viewCurrent}
+                    days={[this.props.calendar.now.format('dddd')]}>
+                </Weekdays>
+            );
+        }
+        else {
+            return (
+                <Weekdays
+                    today={this.state.today}
+                    currentView={this.props.viewCurrent}
+                    days={this.state.weekDays}>
+                </Weekdays>
+            );
+        }
+
+    }
+
     render() {
         return (
 
@@ -222,9 +252,9 @@ class Calendar extends Component {
                 <b>this.props.calendar.now</b> {JSON.stringify(this.props.calendar.now.format("YYYY-MM-DD"))} <br />
                 <b>this.state.today</b> {JSON.stringify(this.state.today.format("YYYY-MM-DD"))} <br />
 
-                <Weekdays today={this.state.today} currentView={this.props.viewCurrent} days={this.state.weekDays}></Weekdays>
+                {this.handleWeekDay()}
 
-                <div className="calendar-body container">
+                <div className={"container" + (this.props.viewCurrent === 'Day' ? '' : ' calendar-body')}>
                     {
                         this.state.calendarWeeks.map((calendarWeek, index) => {
 
@@ -234,6 +264,7 @@ class Calendar extends Component {
 
                             return (
                                 <CalendarRow
+                                    currentView={this.props.viewCurrent}
                                     key={"week" + index}
                                     weekData={calendarWeek}
                                     present={this.state.today}

@@ -10,8 +10,9 @@ import './CalendarRow.css';
 class CalendarRow extends Component {
 
     render() {
+
         return (
-            <div  className="week row">
+            <div className={"row " + (this.props.currentView === "Day" ? 'big-day' : 'week')}>
                 {
 
                     this.props.weekData.map((day, index) => {
@@ -24,6 +25,7 @@ class CalendarRow extends Component {
                         return (
                             <CalendarDay
                                 key={"day" + index}
+                                currentView={this.props.currentView}
                                 date={day.date}
                                 present={this.props.present}
                                 events={_events}>
@@ -42,7 +44,8 @@ class CalendarRow extends Component {
 CalendarRow.propTypes = {
     weekData: PropTypes.array.isRequired,
     weekEvents: PropTypes.array.isRequired,
-    present: PropTypes.object.isRequired
+    present: PropTypes.object.isRequired,
+    currentView: PropTypes.string.isRequired
 };
 
 export default CalendarRow;

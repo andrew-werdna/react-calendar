@@ -1,10 +1,22 @@
 .single_day {
     border: 1px solid rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    height: 10em;
 }
 
 .today {
     background-color: rgba(23, 101, 228, 0.5);
     border-radius: 50%;
+}
+
+.normal {
+    min-height: 10em;
+}
+
+.large-day {
+    min-height: 50vh;
+    width: 25% !important;
+}
+
+.small-date {
+    width: 50%;
 }
