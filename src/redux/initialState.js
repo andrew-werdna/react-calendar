@@ -16,7 +16,9 @@ export const initialState = {
         }
     },
     calendar: {
-        now: moment()
+        now: moment(),
+        creatingEvent: false,
+        editingEvent: false
     }
 };
 

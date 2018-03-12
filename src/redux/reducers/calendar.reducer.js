@@ -12,6 +12,18 @@ const monthReducer = (state = initialState.calendar, action) => {
             newState.now = action.payload;
             return newState;
 
+        case 'SET_CREATING_EVENT':
+
+            let newState = getCurrentState(state);
+            newState.creatingEvent = action.payload;
+            return newState;
+
+        case 'SET_EDITING_EVENT':
+
+            let newState = getCurrentState(state);
+            newState.editingEvent = action.payload;
+            return newState;
+
         default:
             return state;
     }
