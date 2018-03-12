@@ -12,9 +12,11 @@ import CalendarRow from '../../components/CalendarRow/CalendarRow';
 import Event from "../../components/Event/Event";
 
 import * as actionCreators from "../../redux/actions/index";
-import { weekdays } from '../../redux/initialState';
+import {
+    getCurrentState,
+    weekdays
+} from '../../redux/initialState';
 import * as TimeUtils from '../../utils/index';
-import { getCurrentState } from '../../redux/initialState';
 
 class Calendar extends Component {
 
