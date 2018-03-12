@@ -24,6 +24,8 @@ class CalendarRow extends Component {
 
                         return (
                             <CalendarDay
+                                showNewEvent={this.props.showNewEvent}
+                                showEditEvent={this.props.showEditEvent}
                                 key={"day" + index}
                                 currentView={this.props.currentView}
                                 date={day.date}
@@ -45,7 +47,9 @@ CalendarRow.propTypes = {
     weekData: PropTypes.array.isRequired,
     weekEvents: PropTypes.array.isRequired,
     present: PropTypes.object.isRequired,
-    currentView: PropTypes.string.isRequired
+    currentView: PropTypes.string.isRequired,
+    showNewEvent: PropTypes.func.isRequired,
+    showEditEvent: PropTypes.func.isRequired
 };
 
 export default CalendarRow;

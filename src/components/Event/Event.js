@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
     Button,
     Modal
@@ -13,15 +13,19 @@ class Event extends Component {
 
         return (
 
-            <Modal>
+            <Modal
+                show={this.props.show}
+                onHide={this.props.onHide}>
                 <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
+                    <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
+                    Testing.....
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button>Cancel</Button>
+                    <Button
+                        onClick={this.props.onHide}
+                        bsStyle='default'>Cancel</Button>
                     <Button bsStyle="primary">Save changes</Button>
                 </Modal.Footer>
             </Modal>
@@ -32,8 +36,10 @@ class Event extends Component {
 
 }
 
-// Event.propTypes = {
-
-// };
+Event.propTypes = {
+    show: PropTypes.bool.isRequired,
+    onHide: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
+};
 
 export default Event;

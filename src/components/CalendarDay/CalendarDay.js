@@ -11,7 +11,9 @@ class CalendarDay extends Component {
 
     render() {
         return (
-            <div className={"single_day col-md-1 columns-7 " + (this.getIsDay() ? 'large-day' : 'normal')}>
+            <div
+                onClick={this.props.showNewEvent}
+                className={"single_day col-md-1 columns-7 " + (this.getIsDay() ? 'large-day' : 'normal')}>
                 <div className="row">
                     <div className="col-md-4">
                         <div
@@ -29,7 +31,9 @@ class CalendarDay extends Component {
                                 <div
                                     key={`event_${index}_${event.id}`}
                                     className="row">
-                                    <div className="event_item col-md-12">
+                                    <div
+                                        onClick={this.props.showEditEvent}
+                                        className="event_item col-md-12">
                                        - {event.title}
                                     </div>
                                 </div>
@@ -46,7 +50,9 @@ CalendarDay.propTypes = {
     date: PropTypes.object.isRequired,
     present: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
-    currentView: PropTypes.string.isRequired
+    currentView: PropTypes.string.isRequired,
+    showNewEvent: PropTypes.func.isRequired,
+    showEditEvent: PropTypes.func.isRequired
 }
 
 export default CalendarDay;

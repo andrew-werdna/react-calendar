@@ -237,6 +237,19 @@ class Calendar extends Component {
 
     }
 
+    hideForm() {
+        this.props.actions.setIsCreatingEvent(false);
+        this.props.actions.setIsEditingEvent(false);
+    }
+
+    showNewEvent() {
+        this.props.actions.setIsCreatingEvent(true);
+    }
+
+    showEditEvent() {
+        this.props.actions.setIsEditingEvent(true);
+    }
+
     render() {
         return (
 
@@ -266,6 +279,8 @@ class Calendar extends Component {
 
                             return (
                                 <CalendarRow
+                                    showNewEvent={this.showNewEvent.bind(this)}
+                                    showEditEvent={this.showEditEvent.bind(this)}
                                     currentView={this.props.viewCurrent}
                                     key={"week" + index}
                                     weekData={calendarWeek}
@@ -277,6 +292,18 @@ class Calendar extends Component {
                         })
                     }
                 </div>
+
+                <Event
+                    show={this.props.calendar.creatingEvent}
+                    onHide={this.hideForm.bind(this)}
+                    title="Create Event">
+                </Event>
+
+                <Event
+                    show={this.props.calendar.editingEvent}
+                    onHide={this.hideForm.bind(this)}
+                    title="Edit Event">
+                </Event>
 
             </div>
 
