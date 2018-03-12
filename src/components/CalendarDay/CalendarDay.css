@@ -1,6 +1,7 @@
 .single_day {
     border: 1px solid rgba(0, 0, 0, 0.4);
     overflow: hidden;
+    cursor: pointer;
 }
 
 .today {
