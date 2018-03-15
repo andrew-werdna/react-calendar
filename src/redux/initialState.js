@@ -1,7 +1,10 @@
 import moment from "moment";
 
 export const initialState = {
-    events: [],
+    events: {
+        collection: [],
+        current: {}
+    },
     settings: {
         view: {
             current: "Month",

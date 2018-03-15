@@ -32,7 +32,7 @@ class CalendarDay extends Component {
                                     key={`event_${index}_${event.id}`}
                                     className="row">
                                     <div
-                                        onClick={this.props.showEditEvent}
+                                        onClick={() => this.props.showEditEvent(event.id)}
                                         className="event_item col-md-12">
                                        - {event.title}
                                     </div>

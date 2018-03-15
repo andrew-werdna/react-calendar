@@ -246,7 +246,8 @@ class Calendar extends Component {
         this.props.actions.setIsCreatingEvent(true);
     }
 
-    showEditEvent() {
+    showEditEvent(id) {
+        this.props.actions.editEvent(id);
         this.props.actions.setIsEditingEvent(true);
     }
 
@@ -300,6 +301,7 @@ class Calendar extends Component {
                 </Event>
 
                 <Event
+                    event={this.props.currentEvent}
                     show={this.props.calendar.editingEvent}
                     onHide={this.hideForm.bind(this)}
                     title="Edit Event">
@@ -316,7 +318,8 @@ const mapStateToProps = (state) => {
     return {
         viewChoices: state.settings.view.choices,
         viewCurrent: state.settings.view.current,
-        events: state.events,
+        events: state.events.collection,
+        currentEvent: state.events.current,
         apiEndpoint: state.settings.api.events,
         calendar: state.calendar
     };

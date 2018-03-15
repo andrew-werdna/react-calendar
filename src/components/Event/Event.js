@@ -11,6 +11,10 @@ class Event extends Component {
 
     render() {
 
+        if (this.props.event) {
+            console.log(`event being edited is ${JSON.stringify(this.props.event)}`);
+        }
+
         return (
 
             <Modal
@@ -39,7 +43,8 @@ class Event extends Component {
 Event.propTypes = {
     show: PropTypes.bool.isRequired,
     onHide: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    event: PropTypes.object
 };
 
 export default Event;
