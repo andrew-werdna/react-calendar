@@ -1,4 +1,5 @@
 import moment from "moment";
+import cloneDeep from "lodash/cloneDeep";
 
 export const initialState = {
     events: {
@@ -26,7 +27,7 @@ export const initialState = {
 };
 
 export const getCurrentState = (state = initialState) => {
-    return Object.assign({}, state);
+    return cloneDeep(state);
 };
 
 export const weekdays = [

@@ -13,6 +13,19 @@ const eventReducer = (state = initialState.events, action) => {
             newState.collection.push(action.payload);
             return newState;
 
+        case 'EVENT_CLEAR':
+
+            newState.current = action.payload;
+            return newState;
+
+        case 'EVENT_INIT':
+
+            newState.current = {
+                date: action.payload
+            };
+
+            return newState;
+
         case 'EVENT_EDIT':
 
             let _current = newState.collection.find((event) => {

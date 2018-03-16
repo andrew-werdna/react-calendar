@@ -21,8 +21,3 @@
 .small-date {
     width: 50%;
 }
-
-.event_item:hover {
-    font-weight: bold;
-    text-decoration: underline;
-}

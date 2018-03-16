@@ -5,10 +5,11 @@ import {
 
 const viewReducer = (state = initialState.settings, action) => {
 
+    let newState = getCurrentState(state);
+
     switch (action.type) {
         case 'SET_VIEW':
 
-            let newState = getCurrentState(state);
             newState.view.current = action.payload;
             return newState;
 

@@ -24,9 +24,9 @@ class CalendarRow extends Component {
 
                         return (
                             <CalendarDay
+                                key={"day" + index}
                                 showNewEvent={this.props.showNewEvent}
                                 showEditEvent={this.props.showEditEvent}
-                                key={"day" + index}
                                 currentView={this.props.currentView}
                                 date={day.date}
                                 present={this.props.present}

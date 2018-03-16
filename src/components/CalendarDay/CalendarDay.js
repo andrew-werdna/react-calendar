@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './CalendarDay.css';
 import * as TimeUtils from "../../utils";
+import CalendarEventItem from "../CalendarEventItem/CalendarEventItem";
 
 class CalendarDay extends Component {
 
@@ -12,7 +13,12 @@ class CalendarDay extends Component {
     render() {
         return (
             <div
-                onClick={this.props.showNewEvent}
+                onClick={
+                    (e) => {
+                        this.props.showNewEvent(this.props.date)
+                        e.stopPropagation();
+                    }
+                }
                 className={"single_day col-md-1 columns-7 " + (this.getIsDay() ? 'large-day' : 'normal')}>
                 <div className="row">
                     <div className="col-md-4">
@@ -28,15 +34,11 @@ class CalendarDay extends Component {
                     {
                         this.props.events.map((event, index) => {
                             return (
-                                <div
+                                <CalendarEventItem
                                     key={`event_${index}_${event.id}`}
-                                    className="row">
-                                    <div
-                                        onClick={() => this.props.showEditEvent(event.id)}
-                                        className="event_item col-md-12">
-                                       - {event.title}
-                                    </div>
-                                </div>
+                                    event={event}
+                                    showEditEvent={this.props.showEditEvent}>
+                                </CalendarEventItem>
                             );
                         })
                     }

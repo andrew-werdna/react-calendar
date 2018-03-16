@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
     Button,
+    ControlLabel,
+    form,
+    FormControl,
+    FormGroup,
     Modal
 } from 'react-bootstrap';
 
@@ -11,8 +15,9 @@ class Event extends Component {
 
     render() {
 
-        if (this.props.event) {
-            console.log(`event being edited is ${JSON.stringify(this.props.event)}`);
+        if (this.props.event && Object.getOwnPropertyNames(this.props.event).length > 0) {
+            console.log(`this.props.event`);
+            console.dir(this.props.event);
         }
 
         return (
@@ -24,7 +29,13 @@ class Event extends Component {
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Testing.....
+
+                    <form>
+                        <FormGroup controlId="eventForm">
+
+                        </FormGroup>
+                    </form>
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button

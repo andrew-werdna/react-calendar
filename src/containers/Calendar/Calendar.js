@@ -240,9 +240,11 @@ class Calendar extends Component {
     hideForm() {
         this.props.actions.setIsCreatingEvent(false);
         this.props.actions.setIsEditingEvent(false);
+        this.props.actions.clearEvent();
     }
 
-    showNewEvent() {
+    showNewEvent(date) {
+        this.props.actions.initEvent(date);
         this.props.actions.setIsCreatingEvent(true);
     }
 
@@ -262,11 +264,6 @@ class Calendar extends Component {
                     onPrevious={this.selectPrevious.bind(this)}
                     onChangeView={this.changeView.bind(this)}>
                 </CalendarHeader>
-
-                <b>this.props.viewCurrent</b> {JSON.stringify(this.props.viewCurrent)} <br />
-                <b>this.props.events</b> {JSON.stringify(this.props.events)} <br />
-                <b>this.props.calendar.now</b> {JSON.stringify(this.props.calendar.now.format("YYYY-MM-DD"))} <br />
-                <b>this.state.today</b> {JSON.stringify(this.state.today.format("YYYY-MM-DD"))} <br />
 
                 {this.handleWeekDay()}
 
