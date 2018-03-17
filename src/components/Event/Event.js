@@ -24,56 +24,10 @@ function FieldGroup({ id, label, help, ...props }) {
 
 class Event extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            title: '',
-            date: '',
-            start: '',
-            end: '',
-            long_day: '',
-            location: '',
-            notes: ''
-        };
-
-        this.clearState.bind(this);
-    }
-
-    handleNewEventProps(nextProps) {
-        this.setState({
-            ...nextProps.event
-        });
-    }
-
-    componentDidMount() {
-        this.handleNewEventProps(this.props);
-    }
-
-    clearState() {
-        this.setState({
-            title: '',
-            date: '',
-            start: '',
-            end: '',
-            long_day: '',
-            location: '',
-            notes: ''
-        });
-    }
-
-    componentWillUnmount() {
-        this.clearState();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.handleNewEventProps(nextProps);
-    }
-
     handleStateChange(e, key) {
 
         let nState = {
-            ...this.state
+            ...this.props
         };
 
         nState[key] = e.target.value;
@@ -91,37 +45,37 @@ class Event extends Component {
                     <FormControl
                         type="text"
                         placeholder="Enter Title"
-                        defaultValue={this.state.title}
+                        defaultValue={this.props.event.title}
                     />
                     <ControlLabel>Date</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Date"
-                        defaultValue={this.state.date}
+                        defaultValue={this.props.event.date}
                     />
                     <ControlLabel>Start Time</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Start Time"
-                        defaultValue={this.state.start}
+                        defaultValue={this.props.event.start}
                     />
                     <ControlLabel>End Time</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter End Time"
-                        defaultValue={this.state.end}
+                        defaultValue={this.props.event.end}
                     />
                     <ControlLabel>Location</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Location"
-                        defaultValue={this.state.location}
+                        defaultValue={this.props.event.location}
                     />
                     <ControlLabel>Notes</ControlLabel>
                     <FormControl
                         componentClass="textarea"
                         placeholder="Enter Notes"
-                        defaultValue={this.state.notes}
+                        defaultValue={this.props.event.notes}
                     />
                 </FormGroup>
             </form>
@@ -135,7 +89,7 @@ class Event extends Component {
 
             <Modal
                 show={this.props.show}
-                onExit={() => this.clearState()}
+                onExit={this.props.onHide}
                 onHide={this.props.onHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.props.title}</Modal.Title>
