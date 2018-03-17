@@ -36,92 +36,92 @@ class Event extends Component {
             location: '',
             notes: ''
         };
+
+        this.clearState.bind(this);
     }
 
-    handleDate(e) {
+    handleNewEventProps(nextProps) {
         this.setState({
-            ...this.state,
-            date: e.target.value
+            ...nextProps.event
         });
+    }
+
+    componentDidMount() {
+        this.handleNewEventProps(this.props);
+    }
+
+    clearState() {
+        this.setState({
+            title: '',
+            date: '',
+            start: '',
+            end: '',
+            long_day: '',
+            location: '',
+            notes: ''
+        });
+    }
+
+    componentWillUnmount() {
+        this.clearState();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.handleNewEventProps(nextProps);
+    }
+
+    handleStateChange(e, key) {
+
+        let nState = {
+            ...this.state
+        };
+
+        nState[key] = e.target.value;
+
+        this.setState(nState);
+
     }
 
     getFormSection() {
 
-        let showLoadedForm = this.props.event &&
-            Object.getOwnPropertyNames(this.props.event).length > 0;
-
-        if (showLoadedForm) {
-            return (
-                <form>
-                    <FormGroup controlId="eventForm">
-                        <ControlLabel>Title</ControlLabel>
-                        <FormControl
-                            type="text"
-                            placeholder="Enter Title"
-                            defaultValue={this.props.event.title}
-                        />
-                        <ControlLabel>Date</ControlLabel>
-                        <FormControl
-                            type="text"
-                            placeholder="Enter Date"
-                            defaultValue={this.props.event.date}
-                            onChange={this.handleDate}
-                        />
-                        <ControlLabel>Start Time</ControlLabel>
-                        <FormControl
-                            type="text"
-                            placeholder="Enter Start Time"
-                            defaultValue={this.props.event.start}
-                        />
-                        <ControlLabel>End Time</ControlLabel>
-                        <FormControl
-                            type="text"
-                            placeholder="Enter End Time"
-                            defaultValue={this.props.event.end}
-                        />
-                        <ControlLabel>Location</ControlLabel>
-                        <FormControl
-                            type="text"
-                            placeholder="Enter Location"
-                            defaultValue={this.props.event.location}
-                        />
-                        <ControlLabel>Notes</ControlLabel>
-                        <FormControl
-                            componentClass="textarea"
-                            placeholder="Enter Notes"
-                            defaultValue={this.props.event.notes}
-                        />
-                    </FormGroup>
-                </form>
-            );
-        }
-
         return (
             <form>
                 <FormGroup controlId="eventForm">
+                    <ControlLabel>Title</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Title"
+                        defaultValue={this.state.title}
                     />
+                    <ControlLabel>Date</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Date"
+                        defaultValue={this.state.date}
                     />
+                    <ControlLabel>Start Time</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Start Time"
+                        defaultValue={this.state.start}
                     />
+                    <ControlLabel>End Time</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter End Time"
+                        defaultValue={this.state.end}
                     />
+                    <ControlLabel>Location</ControlLabel>
                     <FormControl
                         type="text"
                         placeholder="Enter Location"
+                        defaultValue={this.state.location}
                     />
+                    <ControlLabel>Notes</ControlLabel>
                     <FormControl
                         componentClass="textarea"
                         placeholder="Enter Notes"
+                        defaultValue={this.state.notes}
                     />
                 </FormGroup>
             </form>
@@ -131,15 +131,11 @@ class Event extends Component {
 
     render() {
 
-        if (this.props.event && Object.getOwnPropertyNames(this.props.event).length > 0) {
-            console.log(`this.props.event`);
-            console.dir(this.props.event);
-        }
-
         return (
 
             <Modal
                 show={this.props.show}
+                onExit={() => this.clearState()}
                 onHide={this.props.onHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.props.title}</Modal.Title>

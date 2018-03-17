@@ -292,6 +292,7 @@ class Calendar extends Component {
                 </div>
 
                 <Event
+                    event={this.props.currentEvent}
                     show={this.props.calendar.creatingEvent}
                     onHide={this.hideForm.bind(this)}
                     title="Create Event">

@@ -14,9 +14,9 @@ export const deleteEvent = (id) => ({
     payload: id
 });
 
-export const initEvent = (date) => ({
+export const initEvent = (momentObj) => ({
     type: 'EVENT_INIT',
-    payload: date
+    payload: momentObj.format('YYYY/MM/DD')
 });
 
 export const clearEvent = () => ({

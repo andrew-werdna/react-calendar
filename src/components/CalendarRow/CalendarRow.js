@@ -10,7 +10,6 @@ import './CalendarRow.css';
 class CalendarRow extends Component {
 
     render() {
-
         return (
             <div className={"row " + (this.props.currentView === "Day" ? 'big-day' : 'week')}>
                 {
